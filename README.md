@@ -1,2 +1,2 @@
-# busca_em_profundidade
+# Busca em profundidade
 Algoritmo de busca em profundidade
