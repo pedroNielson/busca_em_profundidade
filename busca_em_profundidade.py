@@ -42,17 +42,37 @@ class graph:
                     edges.append({vertices, neighbours})
         return edges
 
+    def dfs_run(self, startPoint):
+        stack = [startPoint]
+        visitedVertexList = []
+
+        while stack:
+            atual = stack.pop()
+            for neighbours in self.graph_dict[atual]:
+                if neighbours not in visitedVertexList:
+                    stack.append(neighbours)
+
+            visitedVertexList.append(atual)
+        
+        return visitedVertexList
+
+    def dfs_find(self, vertice):
+        if vertice not in self.dfs_run("a"):
+            return "Vertice não encontrado"
+        else:
+            return "Vertice " + str(vertice) + " encontrado"
+
 #Estrutura do grafo gerado
 graph_elements = {
 
     "a": {"c", "b"},
-    "b": {"e", "d"},
-    "c": {"x", "f"},
-    "f": {"g"},
-    "d": {},
-    "e": {},
-    "g": {},
-    "x": {},
+    "b": {"a","e", "d"},
+    "c": {"a","x", "f"},
+    "f": {"c","g"},
+    "d": {"b"},
+    "e": {"b"},
+    "g": {"f"},
+    "x": {"c"},
     
 }
 
@@ -61,3 +81,5 @@ Graph = graph(graph_elements)
 print(Graph.verticeList())
 print(Graph.findEdge("c"))
 print(Graph.edgeList())
+print(Graph.dfs_run("a"))
+print(Graph.dfs_find("t"))
